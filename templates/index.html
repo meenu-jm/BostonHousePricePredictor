@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Boston House Price Predictor</title>
+    <style>
+        body { background: #f9f9f9; font-family: Arial; padding: 40px; }
+        .box { max-width: 500px; margin: auto; padding: 20px; background: white;
+               box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 10px; }
+        input[type=text], input[type=submit] {
+            width: 100%; padding: 12px; margin: 10px 0;
+            border-radius: 5px; border: 1px solid #ccc;
+        }
+        input[type=submit] {
+            background-color: #007bff; color: white; border: none;
+            cursor: pointer;
+        }
+        .result { margin-top: 20px; text-align: center; font-size: 18px; color: green; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h2>Boston House Price Predictor</h2>
+        <form action="/predict" method="post">
+            {% for label in ['CRIM','ZN','INDUS','CHAS','NOX','RM','AGE','DIS','RAD','TAX','PTRATIO','B','LSTAT'] %}
+            <label>{{ label }}</label>
+            <input type="text" name="{{ label }}" required>
+            {% endfor %}
+            <input type="submit" value="Predict">
+        </form>
+        {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
